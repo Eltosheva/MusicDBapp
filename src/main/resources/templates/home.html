@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/fragment :: head"></head>
+
+<body>
+<header>
+    <nav th:replace="fragments/fragment :: nav"></nav>
+</header>
+<main class="p-5 align-content-center bg-blur my-main">
+    <h2 class="text-light border-bottom">Total sold copies
+        of all albums:
+        <span th:text="${copies}"></span></h2>
+    <div class="row">
+        <div th:each="a : ${albums}" th:object="${a}" class="col-md-3">
+            <div class="card mb-4 box-shadow">
+                <img th:src="*{imageUrl}" class="card-img-top" alt="Thumbnail [100%x225]"
+                     data-holder-rendered="true"
+                     style="height: 225px; width: 100%; display: block;">
+                <div class="card-body">
+                    <div class="text-center">
+                        <p class="card-text border-bottom "> Name:
+                            <span th:text="*{name}">Name of album</span>
+                        </p>
+                        <p class="card-text border-bottom ">Artist:
+                            <span th:text="*{artist}">Metallica</span>
+                        </p>
+                        <p class="card-text border-bottom ">Genre:
+                            <span th:text="*{genre}">Metal</span>
+                        </p>
+                        <p class="card-text border-bottom ">Price:
+                            <span th:text="*{price}"></span>
+                        </p>
+                        <p class="card-text border-bottom">Release Date:
+                            <span th:text="*{releasedDate}"></span>
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a th:href="@{/album/delete/{id}(id=*{getId()})}"
+                               type="button" class="btn btn-sm btn-outline-secondary">
+                                Delete</a>
+                        </div>
+                        <small class="text-muted">
+                            <span th:text="*{copies}"></span> copies</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="fragments/fragment :: footer">
+</footer>
+</body>
+</html>
